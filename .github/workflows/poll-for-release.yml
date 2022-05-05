@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: Fetch branch name of latest version
         run: |
-          curl -sL https://api.github.com/repos/gollum/gollum/releases | \
-            jq -r ".[].tag_name" | grep -v rc | sort -r -V | head -n 1 > /tmp/gollum-latest-branch-name
+          curl -sL https://api.github.com/repos/gollum/gollum/tags | \
+            jq -r ".[].name" | grep -v rc | sort -r -V | head -n 1 > /tmp/gollum-latest-branch-name
           echo "REMOTE_BRANCH_NAME=$(cat /tmp/gollum-latest-branch-name)" >> $GITHUB_ENV
           curl -sL https://github.com/patrickdung/gollum-container/raw/main/release-versions/gollum-latest.txt -o /tmp/gollum-local-branch-name
           echo "LOCAL_BRANCH_NAME=$(cat /tmp/gollum-local-branch-name)" >> $GITHUB_ENV
