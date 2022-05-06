@@ -2,7 +2,7 @@
 version: "3.9"
 services:
   service-gollum:
-    image: patrickdung/gollum:latest
+    image: ghcr.io/patrickdung/gollum-container:v5.2.3
     pull_policy: always
     container_name: "container-gollum"
     hostname: "container-gollum"
@@ -10,9 +10,11 @@ services:
       - ALL
     environment:
       # - TZ=Etc/GMT-8
+      - WIKI_DATA_PATH=/home/wiki/wikidata
       - GIT_BRANCH_NAME=main
     volumes:
-      - /data/container/app/gollum:/wiki
+      # - /data/container/app/gollum:/wiki
+      - /data/container/app/gollum:/home/wiki/wikidata
     ports:
       - 127.0.0.1:5017:4567
     user: 1000:1000

@@ -1,2 +1,2 @@
 #!/bin/bash
-gollum /wiki --ref ${GIT_BRANCH_NAME}
+gollum ${WIKI_DATA_PATH} --ref ${GIT_BRANCH_NAME}

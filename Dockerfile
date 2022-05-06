@@ -33,6 +33,12 @@ RUN set -eux && \
 
 FROM ${BASE_IMAGE}
 
+ARG LABEL_IMAGE_URL
+ARG LABEL_IMAGE_SOURCE
+
+LABEL org.opencontainers.image.url=${LABEL_IMAGE_URL}
+LABEL org.opencontainers.image.source=${LABEL_IMAGE_SOURCE}
+
 RUN set -eux && \
     apt-get -y update && \
     apt-get -y install --no-install-suggests \
@@ -52,8 +58,8 @@ RUN set -eux && \
       --gid 1000 \
       --key MAIL_DIR=/dev/null \
       wiki && \
-    mkdir -p /wiki && \
-    chown wiki:wiki /wiki && \
+    mkdir -p /home/wiki/wikidata && \
+    chown wiki:wiki /home/wiki/wikidata && \
     if [ -e /usr/lib/x86_64-linux-gnu/libjemalloc.so.2 ] ; then ln -s /usr/lib/x86_64-linux-gnu/libjemalloc.so.2 /usr/lib/libjemalloc.so.2 ; fi && \
     if [ -e /usr/lib/aarch64-linux-gnu/libjemalloc.so.2 ] ; then ln -s /usr/lib/aarch64-linux-gnu/libjemalloc.so.2 /usr/lib/libjemalloc.so.2 ; fi
 
@@ -63,18 +69,18 @@ COPY entrypoint.sh /
 ##USER 1000:1000
 USER wiki
 
-VOLUME /wiki
+VOLUME /home/wiki/wikidata
 
-WORKDIR /wiki
+WORKDIR /home/wiki/wikidata
 
 # For x86_64
 #ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 # For arm64
 #ENV LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libjemalloc.so.2
 ENV LD_PRELOAD=/usr/lib/libjemalloc.so.2
+ENV WIKI_DATA_PATH=/home/wiki/wikidata
 ENV GIT_BRANCH_NAME=main
 
-# Not using home directory as wiki repo
 # Locally make gollum assume default branch is main
 
 #ENTRYPOINT ["gollum"]
