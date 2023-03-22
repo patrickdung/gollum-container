@@ -5,11 +5,11 @@
 # User has to run/provide their git repo
 # when the container is run
 
-ARG BASE_IMAGE="docker.io/ruby:3.1-slim-bullseye"
+ARG BASE_IMAGE="docker.io/ruby:3.2-slim-bullseye"
 
 FROM ${BASE_IMAGE} as build
 
-ARG GOLLUM_VERSION="5.2.3"
+ARG GOLLUM_VERSION="5.3.1"
 
 ARG GIT_BRANCH_NAME="main"
 
