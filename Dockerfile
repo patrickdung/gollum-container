@@ -9,7 +9,7 @@ ARG BASE_IMAGE="docker.io/ruby:3.2-slim-bullseye"
 
 FROM ${BASE_IMAGE} as build
 
-ARG GOLLUM_VERSION="5.3.1"
+ARG GOLLUM_VERSION="5.3.2"
 
 ARG GIT_BRANCH_NAME="main"
 
