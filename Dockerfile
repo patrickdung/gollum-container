@@ -5,7 +5,7 @@
 # User has to run/provide their git repo
 # when the container is run
 
-ARG BASE_IMAGE="docker.io/ruby:3.2-slim-bullseye"
+ARG BASE_IMAGE="docker.io/ruby:3.2-slim-bookworm"
 
 FROM ${BASE_IMAGE} as build
 
